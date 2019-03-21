@@ -7,6 +7,8 @@
 (require 'init-better-defaults)
 (require 'init-ui)
 (require 'init-keybindings)
+(require 'init-defaults)
+(require 'init-functions)
 
 ;; 快速打开配置文件
 (defun open-init-file()

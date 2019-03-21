@@ -1,5 +1,6 @@
 (setq ring-bell-function 'ignore)
 
+;; 自动加载磁盘上被修改的文件
 (global-auto-revert-mode t)
 
 ;; 显示行号
@@ -7,17 +8,30 @@
 
 ;; 不需要备份文件
 (setq make-backup-files nil)
-
 (setq auto-save-default nil)
 
 (recentf-mode 1)			
 (setq recentf-max-menu-items 25)
-
 
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 
 ;; 选中一段文字 之后输入一个字符会替换掉你选中部分的文字
 (delete-selection-mode t)
 
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; dird开的buffer使用同一个缓冲区
+(put 'dired-find-alternate-file 'disabled nil)
+
+;; C-x C-j 进入当前文件夹的所在的路径
+(require 'dired-x)
+
+;; 主动加载 Dired Mode
+;; (require 'dired)
+;; (defined-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+
+;; 延迟加载
+(with-eval-after-load 'dired
+    (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
 
 (provide 'init-better-defaults)
