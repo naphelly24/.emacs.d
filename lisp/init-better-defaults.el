@@ -1,3 +1,5 @@
+(setq debug-on-error t)
+
 (setq ring-bell-function 'ignore)
 
 ;; 自动加载磁盘上被修改的文件
@@ -7,8 +9,10 @@
 (global-linum-mode t)
 
 ;; 不需要备份文件
-(setq make-backup-files nil)
+;; (setq make-backup-files nil)
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 (setq auto-save-default nil)
+
 
 (recentf-mode 1)			
 (setq recentf-max-menu-items 25)
@@ -32,6 +36,31 @@
 
 ;; 延迟加载
 (with-eval-after-load 'dired
-    (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+
+;; 文本解码设置默认为 UTF-8
+(set-language-environment "UTF-8")
+
+;; lisp中不要补全'
+(sp-local-pair '(emacs-lisp-mode lisp-interaction-mode) "'" nil :actions nil)
+
+;; 光标在括号内时也高亮括号
+(define-advice show-paren-function (:around (fn) fix-show-paren-function)
+  "Highlight enclosing parens."
+  (cond ((looking-at-p "\\s(") (funcall fn))
+	(t (save-excursion
+	     (ignore-errors (backward-up-list))
+	     (funcall fn)))))
+
+
+
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode nil)	;use space instead of tab
+
+(setq suggest-key-bindings 1)		;show key binding after using command
+
+;; Navigate windows with M-<arrows>
+(windmove-default-keybindings 'meta)
+(setq windmove-wrap-around t)
 
 (provide 'init-better-defaults)

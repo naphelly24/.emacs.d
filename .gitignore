@@ -7,3 +7,10 @@ ido.last
 smex-items/
 request/
 smex-items
+backups/
+bookmarks
+.session
+.emacs.*
+.uptimes.*
+eshell/
+history
