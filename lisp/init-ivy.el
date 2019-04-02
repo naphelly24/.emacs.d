@@ -1,5 +1,4 @@
-;; enable Ivy completion everywhere
-(ivy-mode 1)
+(ivy-mode 1) ;; enable Ivy completion everywhere
 (desktop-save-mode t)
 (setq ivy-use-virtual-buffers t)
 (setq ivy-count-format "(%d/%d)")

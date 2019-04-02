@@ -57,7 +57,7 @@
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)	;use space instead of tab
 
-(setq suggest-key-bindings 1)		;show key binding after using command
+(setq suggest-key-bindings 1) ;show key binding after using command
 
 ;; Navigate windows with M-<arrows>
 (windmove-default-keybindings 'meta)

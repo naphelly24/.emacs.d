@@ -87,5 +87,10 @@
 
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
+;; magit settings
+(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x M-g") 'magit-dispatch)
+
+
 (provide 'init-packages)
 
