@@ -1,7 +1,6 @@
 (setq debug-on-error t)
 
 (setq ring-bell-function 'ignore)
-
 ;; 自动加载磁盘上被修改的文件
 (global-auto-revert-mode t)
 
@@ -13,8 +12,7 @@
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 (setq auto-save-default nil)
 
-
-(recentf-mode 1)			
+(recentf-mode 1)
 (setq recentf-max-menu-items 25)
 
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
@@ -44,18 +42,17 @@
 ;; lisp中不要补全'
 (sp-local-pair '(emacs-lisp-mode lisp-interaction-mode) "'" nil :actions nil)
 
-;; 光标在括号内时也高亮括号
-(define-advice show-paren-function (:around (fn) fix-show-paren-function)
-  "Highlight enclosing parens."
-  (cond ((looking-at-p "\\s(") (funcall fn))
-	(t (save-excursion
-	     (ignore-errors (backward-up-list))
-	     (funcall fn)))))
-
-
+;; 光标在括号内时也高亮括号(performance issue)
+;; (define-advice show-paren-function (:around (fn) fix-show-paren-function)
+;;   "Highlight enclosing parens."
+;;   (cond ((looking-at-p "\\s(") (funcall fn))
+;; 	(t (save-excursion
+;; 	     (ignore-errors (backward-up-list))
+;; 	     (funcall fn)))))
 
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)	;use space instead of tab
+(setq-default show-trailing-whitespace t)
 
 (setq suggest-key-bindings 1) ;show key binding after using command
 

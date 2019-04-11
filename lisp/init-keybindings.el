@@ -12,12 +12,7 @@
   (define-key company-active-map (kbd "C-n") #'company-select-next)
   (define-key company-active-map (kbd "C-p") #'company-select-previous))
 
-(when *is-a-mac*
-;;  (setq mac-command-modifier 'meta)
-;;  (Setq mac-option-modifier 'super)
-  (setq dired-use-ls-dired nil) ;;macOS command ls doesn't support --dired option while linux os is supported!
-  )
 
-(global-set-key (kbd "C-h") 'backward-delete-char-untabify)
+;; (global-set-key (kbd "C-h") 'backward-delete-char-untabify)
 
 (provide 'init-keybindings)

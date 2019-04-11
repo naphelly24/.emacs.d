@@ -19,11 +19,15 @@
 
 ;; Add Packages
 (defvar hailin/packages '(
-			              ;; --- Auto-completion ---
 			              company
-			              ;; --- Better Editor ---
 			              hungry-delete
+                          command-log-mode
 			              reveal-in-osx-finder ;; M-x reveal-in-osx-finder, open file in finder (OSX only)
+                          diredfl ;; Extra Emacs font lock rules for a more colourful dired
+                          switch-window
+                          beacon
+                          goto-line-preview
+                          rainbow-delimiters
 			              ivy
 			              counsel
                           ;; smex
@@ -35,17 +39,25 @@
 			              flycheck
 			              py-autopep8
 			              smartparens
+                          json-mode
+                          ;; js
 			              js2-mode
+                          typescript-mode
+                          prettier-js
 			              web-mode
-			              nodejs-repl
+                          nodejs-repl
+                          add-node-modules-path
+                          ;; end of js
 			              exec-path-from-shell
                           org
-			              ;; --- Themes ---
-                          
-                          spacemacs-theme
+                          ;; spacemacs-theme
                           spaceline
                           ;; monokai-theme
-			              ;; solarized-theme
+			              solarized-theme
+                          docker
+                          dockerfile-mode
+                          docker-compose-mode
+                          info-colors
 			              ) "Default packages")
 
 (setq package-selected-packages hailin/packages)
@@ -61,29 +73,29 @@
     (when (not (package-installed-p pkg))
       (package-install pkg))))
 
-;; Find Executable Path on OS X
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
-
 (global-hungry-delete-mode)
-
+(beacon-mode 1)
+(setq-default beacon-size 25)
+(setq beacon-blink-duration 0.5)
 (smartparens-global-mode t)
 
 (global-company-mode t)
 
+(diredfl-global-mode)
+
 ;; theme config
-(load-theme 'spacemacs-light t)
+;;(load-theme 'spacemacs-dark t)
+(load-theme 'solarized-dark t)
 (setq powerline-default-separator 'wave)
 (spaceline-spacemacs-theme)
 
-(setq auto-mode-alist
-      (append
-       '(("\\.js\\'" . js2-mode))
-       '(("\\.html\\'" . web-mode))
-       auto-mode-alist))
+
 
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
+(global-set-key (kbd "M-g g") 'goto-line-preview)
+
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
@@ -91,6 +103,7 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x M-g") 'magit-dispatch)
 
+;; color info
+(add-hook 'Info-selection-hook 'info-colors-fontify-node)
 
 (provide 'init-packages)
-

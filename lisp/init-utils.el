@@ -53,4 +53,4 @@
 
 (global-set-key (kbd "C-c =") 'indent-buffer)
 
-(provide 'init-functions)
+(provide 'init-utils)
