@@ -28,19 +28,12 @@
 ;; C-x C-j 进入当前文件夹的所在的路径
 (require 'dired-x)
 
-;; 主动加载 Dired Mode
-;; (require 'dired)
-;; (defined-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-
 ;; 延迟加载
 (with-eval-after-load 'dired
   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
 
 ;; 文本解码设置默认为 UTF-8
 (set-language-environment "UTF-8")
-
-;; lisp中不要补全'
-(sp-local-pair '(emacs-lisp-mode lisp-interaction-mode) "'" nil :actions nil)
 
 ;; 光标在括号内时也高亮括号(performance issue)
 ;; (define-advice show-paren-function (:around (fn) fix-show-paren-function)
@@ -53,6 +46,19 @@
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)	;use space instead of tab
 (setq-default show-trailing-whitespace t)
+;; prefer tab as tab instead of command indent-for-tab-command
+(global-set-key (kbd "TAB") 'self-insert-command)
+
+;; don't show trainling space for term mode, it's ugly
+(add-hook 'term-mode-hook (lambda () (setq show-trailing-whitespace nil)))
+;; don't show line number for term mode.
+;; https://stackoverflow.com/questions/6837511/automatically-disable-a-global-minor-mode-for-a-specific-major-mode
+(add-hook 'term-mode-hook 'hailin/inhibit-global-linum-mode)
+(defun hailin/inhibit-global-linum-mode ()
+  "Counter-act `global-linum-mode'."
+  (add-hook 'after-change-major-mode-hook
+            (lambda () (linum-mode 0))
+            :append :local))
 
 (setq suggest-key-bindings 1) ;show key binding after using command
 

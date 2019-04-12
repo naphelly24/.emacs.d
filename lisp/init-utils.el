@@ -21,7 +21,7 @@
   (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
       (comment-or-uncomment-region (line-beginning-position) (line-end-position))
     (comment-dwim arg)))
-(global-set-key "\M-;" 'qiang-comment-dwim-line) 
+(global-set-key "\M-;" 'qiang-comment-dwim-line)
 
 
 ;;----------------------------------------------------------------------
@@ -29,17 +29,17 @@
 ;;----------------------------------------------------------------------
 (global-set-key [(f8)] 'loop-alpha)
 
-(setq alpha-list '((85 55) (100 100)))    
+(setq alpha-list '((85 55) (100 100)))
 
 (defun loop-alpha ()
-  (interactive)    
-  (let ((h (car alpha-list)))                    
-    ((lambda (a ab)    
-       (set-frame-parameter (selected-frame) 'alpha (list a ab))    
-       (add-to-list 'default-frame-alist (cons 'alpha (list a ab)))    
+  (interactive)
+  (let ((h (car alpha-list)))
+    ((lambda (a ab)
+       (set-frame-parameter (selected-frame) 'alpha (list a ab))
+       (add-to-list 'default-frame-alist (cons 'alpha (list a ab)))
        ) (car h) (car (cdr h)))
-    (setq alpha-list (cdr (append alpha-list (list h))))    
-    )    
+    (setq alpha-list (cdr (append alpha-list (list h))))
+    )
   )
 
 ;;----------------------------------------------------------------------
@@ -52,5 +52,11 @@
     (indent-region (point-min) (point-max) nil)))
 
 (global-set-key (kbd "C-c =") 'indent-buffer)
+
+(defun open-init-packages-file()
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+;; 将函数 open-init-packages-file 绑定到 <f2> 键上
+(global-set-key (kbd "<f2>") 'open-init-packages-file)
 
 (provide 'init-utils)

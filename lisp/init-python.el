@@ -1,20 +1,33 @@
-(elpy-enable)
+(require 'use-package)
 
-;; use flycheck not flymake with elpy
-(when (require 'flycheck nil t)
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (add-hook 'elpy-mode-hook 'flycheck-mode))
-(custom-set-variables
- '(flycheck-python-flake8-executable "python3")
- '(flycheck-python-pycompile-executable "python3")
- '(flycheck-python-pylint-executable "python3"))
+(use-package flycheck :ensure t
+  :config
+  (custom-set-variables
+   '(flycheck-python-flake8-executable "python3")
+   '(flycheck-python-pycompile-executable "python3")
+   '(flycheck-python-pylint-executable "python3"))
+  )
 
-;; enable autopep8 formatting on save
-(require 'py-autopep8)
-(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+(use-package py-autopep8
+  :ensure t
+  :config
+  (require 'py-autopep8)
+  (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+  )
+(use-package ein :ensure t)
+(use-package elpy
+  :ensure t
+  :config
+  (elpy-enable)
+  ;; use flycheck not flymake with elpy
+  (when (require 'flycheck nil t)
+    (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+    (add-hook 'elpy-mode-hook 'flycheck-mode))
+
+  (setq elpy-rpc-python-command "python3")
+  )
 
 ;; config interpreter
-(setq elpy-rpc-python-command "python3")
 (setq python-shell-interpreter "python3")
 (setq pyvenv-virtualenvwrapper-python "/usr/bin/python3")
 

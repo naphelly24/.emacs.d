@@ -1,10 +1,15 @@
 ;;; init-windows.el -*- lexical-binding: t -*-
-;; Make "C-x o" prompt for a target window when there are more than 2
-(require 'switch-window)
-(setq-default switch-window-shortcut-style 'alphabet)
-(setq-default switch-window-timeout nil)
-(global-set-key (kbd "C-x o") 'switch-window)
 
+(require 'use-package)
+
+(use-package switch-window
+  :ensure t
+  :config
+  ;; Make "C-x o" prompt for a target window when there are more than 2
+  (setq-default switch-window-shortcut-style 'alphabet)
+  (setq-default switch-window-timeout nil)
+  (global-set-key (kbd "C-x o") 'switch-window)
+  )
 
 ;;----------------------------------------------------------------------------
 ;; When splitting window, show (other-buffer) in the new window

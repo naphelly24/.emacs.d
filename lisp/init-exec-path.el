@@ -1,5 +1,8 @@
 ;; Find Executable Path on OS X
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
+(require 'use-package)
+
+(use-package exec-path-from-shell
+  :ensure t
+  :config (exec-path-from-shell-initialize))
 
 (provide 'init-exec-path)
