@@ -64,14 +64,15 @@
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
   )
 
-(use-package beacon
+(when *is-a-mac*
+  (use-package beacon
   :ensure t
   :config
   (beacon-mode 1)
   (setq-default beacon-size 25)
   (setq beacon-blink-duration 0.5)
   (setq beacon-color hailin/cursor-color)
-  )
+  ))
 
 (setq frame-title-format
       '((:eval (if (buffer-file-name)
