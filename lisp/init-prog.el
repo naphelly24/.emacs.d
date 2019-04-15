@@ -28,6 +28,19 @@
 
 (use-package docker-compose-mode :ensure t)
 
+(use-package yasnippet :ensure t
+  :config
+  (require 'yasnippet)
+  (yas-global-mode 1)
+  )
+
+(use-package yasnippet-snippets :ensure t)
+
+(use-package expand-region :ensure t
+  :config
+  (global-set-key (kbd "C-=") 'er/expand-region)
+  )
+
 (use-package smartparens
   :ensure t
   :config

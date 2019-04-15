@@ -10,7 +10,7 @@
 ;; 不需要备份文件
 ;; (setq make-backup-files nil)
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
-(setq auto-save-default nil)
+(setq auto-save-default nil) ; stop creating #autosave# files
 
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
@@ -65,5 +65,8 @@
 ;; Navigate windows with M-<arrows>
 (windmove-default-keybindings 'meta)
 (setq windmove-wrap-around t)
+
+(setq-default kill-whole-line t)   ;Delete the CR and CL when C-k at beginning of the line
+(setq kill-do-not-dave-duplicates t) ;if kill content are the same, ignore them
 
 (provide 'init-better-defaults)
