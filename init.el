@@ -30,6 +30,7 @@
 (require 'init-prog)
 (require 'init-python)
 (require 'init-web)
+(require 'init-org)
 (require 'init-essential-tools)
 (require 'init-osx-keys)
 
