@@ -49,4 +49,18 @@
   (sp-local-pair '(emacs-lisp-mode lisp-interaction-mode) "'" nil :actions nil)
   )
 
+(use-package groovy-mode :ensure t
+  ;; :config
+  ;; (setq auto-mode-alist
+  ;;       (append
+  ;;        '(("\\.gradle\\'" . groovy-mode))
+  ;;        auto-mode-alist))
+  )
+
+(use-package go-mode :ensure t
+  :config
+  (autoload 'go-mode "go-mode" nil t)
+  (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+  )
+
 (provide 'init-prog)

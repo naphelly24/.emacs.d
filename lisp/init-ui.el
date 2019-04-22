@@ -38,6 +38,13 @@
   (load-theme 'monokai t)
   )
 
+;; (use-package spacemacs-theme
+;;   :ensure t
+;;   :defer t
+;;   :init
+;;   (load-theme 'spacemacs-dark t)
+;;   )
+
 ;; (use-package solarized-theme
 ;;   :ensure t
 ;;   :config
