@@ -47,18 +47,7 @@
 (setq-default indent-tabs-mode nil)	;use space instead of tab
 (setq-default show-trailing-whitespace t)
 ;; prefer tab as tab instead of command indent-for-tab-command
-(global-set-key (kbd "TAB") 'self-insert-command)
-
-;; don't show trainling space for term mode, it's ugly
-(add-hook 'term-mode-hook (lambda () (setq show-trailing-whitespace nil)))
-;; don't show line number for term mode.
-;; https://stackoverflow.com/questions/6837511/automatically-disable-a-global-minor-mode-for-a-specific-major-mode
-(add-hook 'term-mode-hook 'hailin/inhibit-global-linum-mode)
-(defun hailin/inhibit-global-linum-mode ()
-  "Counter-act `global-linum-mode'."
-  (add-hook 'after-change-major-mode-hook
-            (lambda () (linum-mode 0))
-            :append :local))
+;; (global-set-key (kbd "TAB") 'self-insert-command)
 
 (setq suggest-key-bindings 1) ;show key binding after using command
 

@@ -7,7 +7,6 @@
 (package-initialize)
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-(require 'init-benchmarking) ;; Measure startup time
 
 (defconst *is-a-mac* (eq system-type 'darwin))
 
@@ -23,6 +22,7 @@
 
 (require 'init-packages)
 (require 'init-exec-path)
+(require 'init-evil)
 (require 'init-better-defaults)
 (require 'init-ui)
 (require 'init-utils)

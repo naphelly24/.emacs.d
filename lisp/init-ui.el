@@ -14,29 +14,39 @@
 
 ;; 更改光标的样式
 ;; (setq-default cursor-type 't)
-(set-cursor-color hailin/cursor-color)
+;; (set-cursor-color hailin/cursor-color)
 
 ;; full screen
 (setq initial-frame-alist (quote ((fullscreen . maximized))))
 
-(global-hl-line-mode t)
+;; (global-hl-line-mode t)
 
 ;; 更改显示字体大小 14pt
 ;; http://stackoverflow.com/questions/294664/how-to-set-the-font-size-in-emacs
 (set-face-attribute 'default nil :height 140)
 
-;; Non-zero values for `line-spacing' can mess up ansi-term and co,
-;; so we zero it explicitly in those cases.
+;; customize term mode
+;; Non-zero values for `line-spacing' can mess up ansi-term and co, so we zero it explicitly in those cases.
 (add-hook 'term-mode-hook
           (lambda ()
             (setq line-spacing 0)))
+(add-hook 'term-mode-hook
+          (lambda () (setq show-trailing-whitespace nil))
+          )
+
+;; https://stackoverflow.com/questions/6837511/automatically-disable-a-global-minor-mode-for-a-specific-major-mode
+(defun hailin/inhibit-linum-mode ()
+  (add-hook 'after-change-major-mode-hook
+            (lambda () (linum-mode 0))
+            :append :local))
+
 
 ;; theme config
-(use-package monokai-theme
-  :ensure t
-  :config
-  (load-theme 'monokai t)
-  )
+;; (use-package monokai-theme
+;;   :ensure t
+;;   :config
+;;   (load-theme 'monokai t)
+;;   )
 
 ;; (use-package spacemacs-theme
 ;;   :ensure t
@@ -45,11 +55,11 @@
 ;;   (load-theme 'spacemacs-dark t)
 ;;   )
 
-;; (use-package solarized-theme
-;;   :ensure t
-;;   :config
-;;   (load-theme 'solarized-dark t)
-;;   )
+(use-package solarized-theme
+  :ensure t
+  :config
+  (load-theme 'solarized-light t)
+  )
 
 ;; better info colors
 (use-package info-colors
@@ -85,7 +95,7 @@
       '((:eval (if (buffer-file-name)
                    (abbreviate-file-name (buffer-file-name))
                  "%b"))
-        (:eval (if (buffer-modified-p) 
+        (:eval (if (buffer-modified-p)
                    " *"))
         ))
 
